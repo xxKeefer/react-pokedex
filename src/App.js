@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import PokemonList from "./PokemonList";
+import PokemonCard from "./PokemonCard";
 import SearchBar from "./SearchBar";
 
 function App() {
@@ -24,15 +25,12 @@ function App() {
     );
   }, [allPokes, searchInput]);
 
-  function updateSearchBar(e) {
-    setSearchInput(e.target.value);
-  }
-
   return (
     <div className="App">
       <h1>Pokedex</h1>
-      <SearchBar onSearchChange={updateSearchBar}></SearchBar>
+      <SearchBar onSearchChange={(text) => setSearchInput(text)}></SearchBar>
       <PokemonList pokemon={pokemon}></PokemonList>
+      <PokemonCard pokemon={pokemon}></PokemonCard>
     </div>
   );
 }

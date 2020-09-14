@@ -7,7 +7,7 @@ export default function SearchBar({ onSearchChange }) {
         <input
           type="text"
           placeholder="PokeSearch..."
-          onChange={onSearchChange}
+          onChange={(e) => onSearchChange(e.target.value)}
         />
       </form>
     </div>
