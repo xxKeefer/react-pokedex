@@ -14,7 +14,7 @@ function App() {
   const [species, setSpecies] = useState(null);
 
   useEffect(() => {
-    axios.get("http://pokeapi.co/api/v2/pokemon/?limit=811").then((res) => {
+    axios.get("https://pokeapi.co/api/v2/pokemon/?limit=811").then((res) => {
       setAllPokes(res.data.results.map((p) => p));
       setPokemon(res.data.results.map((p) => p));
     });
