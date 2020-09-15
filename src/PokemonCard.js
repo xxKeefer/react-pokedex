@@ -15,8 +15,13 @@ export default function PokemonCard({ pokemonInfo, species }) {
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-4 marg-22">Description</p>
-              <p class="subtitle is-6">{processedFlavorText}</p>
+              <p class="title is-4 is-capitalized">{pokemonInfo.name}</p>
+              <p className="subtitle is-6">
+                {pokemonInfo.types.map((t) => (
+                  <span className="is-capitalized">{t.type.name} </span>
+                ))}
+              </p>
+              <p class="">{processedFlavorText}</p>
             </div>
           </div>
         </div>
