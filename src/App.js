@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     let regex;
     searchInput === null ? (regex = ".*") : (regex = searchInput);
-    // allPokes.filter((p) => p.name.match(new RegExp(`^${regex}$`)));
     let newList = allPokes.filter((p) =>
       p.name.match(new RegExp(`^${regex}\\w+`))
     );
