@@ -26,7 +26,7 @@ function App() {
     let newList = allPokes.filter((p) =>
       p.name.match(new RegExp(`^${regex}\\w+`))
     );
-    if (newList.length === 2) {
+    if (newList.length === 2 || newList.length === 3) {
       setPokemon([newList[0]]);
     } else {
       setPokemon(newList);
