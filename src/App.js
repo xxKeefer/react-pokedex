@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import "react-bulma-components/dist/react-bulma-components.min.css";
 import PokemonList from "./PokemonList";
 import PokemonCard from "./PokemonCard";
 import SearchBar from "./SearchBar";
@@ -22,9 +23,15 @@ function App() {
   useEffect(() => {
     let regex;
     searchInput === null ? (regex = ".*") : (regex = searchInput);
-    setPokemon(
-      allPokes.filter((p) => p.name.match(new RegExp(`^${regex}\\w+`)))
+    // allPokes.filter((p) => p.name.match(new RegExp(`^${regex}$`)));
+    let newList = allPokes.filter((p) =>
+      p.name.match(new RegExp(`^${regex}\\w+`))
     );
+    if (newList.length === 2) {
+      setPokemon([newList[0]]);
+    } else {
+      setPokemon(newList);
+    }
   }, [allPokes, searchInput]);
 
   useEffect(() => {
@@ -49,10 +56,28 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pokedex</h1>
-      <SearchBar onSearchChange={(text) => setSearchInput(text)}></SearchBar>
-      <PokemonList pokemon={pokemon}></PokemonList>
-      <PokemonCard pokemonInfo={pokemonInfo} species={species}></PokemonCard>
+      <div class="has-text-centered">
+        <section class="hero is-success is-small">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">Pokedex</h1>
+              <h2 class="subtile">type to filter down the results..</h2>
+              <SearchBar
+                onSearchChange={(text) => setSearchInput(text)}
+              ></SearchBar>
+            </div>
+          </div>
+        </section>
+        <div className="columns is-centered">
+          <div className="column is-third">
+            <PokemonList pokemon={pokemon}></PokemonList>
+            <PokemonCard
+              pokemonInfo={pokemonInfo}
+              species={species}
+            ></PokemonCard>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

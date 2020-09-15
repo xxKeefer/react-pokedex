@@ -4,7 +4,9 @@ export default function PokemonList({ pokemon }) {
   return (
     <div>
       {pokemon.map((p) => (
-        <div key={p.name}>{p.name}</div>
+        <div class="is-capitalized" key={p.name}>
+          {p.name}
+        </div>
       ))}
     </div>
   );
