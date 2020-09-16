@@ -14,10 +14,12 @@ function App() {
   const [species, setSpecies] = useState(null);
 
   useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon/?limit=811").then((res) => {
+    async function getInitialPokeData() {
+      let res = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=811");
       setAllPokes(res.data.results.map((p) => p));
       setPokemon(res.data.results.map((p) => p));
-    });
+    }
+    getInitialPokeData();
   }, []);
 
   useEffect(() => {
@@ -34,23 +36,27 @@ function App() {
   }, [allPokes, searchInput]);
 
   useEffect(() => {
-    if (pokemon.length === 1) {
-      axios.get(pokemon[0].url).then((res) => {
+    async function getSpecificPokeData(pokeList) {
+      if (pokeList.length === 1) {
+        let res = await axios.get(pokemon[0].url);
         setPokemonInfo(res.data);
-      });
-    } else {
-      setPokemonInfo(null);
+      } else {
+        setPokemonInfo(null);
+      }
     }
+    getSpecificPokeData(pokemon);
   }, [pokemon]);
 
   useEffect(() => {
-    if (pokemonInfo !== null) {
-      axios.get(pokemonInfo.species.url).then((res) => {
+    async function getSpeciesData(pokeInfo) {
+      if (pokeInfo !== null) {
+        let res = await axios.get(pokeInfo.species.url);
         setSpecies(res.data);
-      });
-    } else {
-      setSpecies(null);
+      } else {
+        setSpecies(null);
+      }
     }
+    getSpeciesData(pokemonInfo);
   }, [pokemonInfo]);
 
   return (
